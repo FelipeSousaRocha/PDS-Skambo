@@ -1,6 +1,4 @@
-from django.shortcuts import render, Produto
+from django.shortcuts import render
 
-def index(request):
-    produto = Produto.objects.filter(descricao__icontains=search)
-
-    return render(request,"skambo/index.html")
+def skambo(request):
+    return render(request,"skambo/skambo.html")
