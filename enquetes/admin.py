@@ -11,6 +11,10 @@ class PerguntaAdmin(admin.ModelAdmin):
         ('Informações da Data',{'fields': ['data_publicacao']}),
         ]
     inlines = [OpcaoInline]
+    list_display = ('texto', 'id', 'data_publicacao', 'publicada_recentemente')
+    list_filter = ['data_publicacao']
+    search_fields = ['texto']
 
 admin.site.register(Pergunta, PerguntaAdmin)
+admin.site.site_header = 'Administração das aplicações de Felipe Rocha'
 #admin.site.register(Opcao)

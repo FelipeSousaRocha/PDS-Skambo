@@ -10,6 +10,9 @@ class Pergunta(models.Model):
     def publicada_recentemente(self):
         agora = timezone.now()
         return agora-datetime.timedelta(days=1) <= self.data_publicacao <= agora
+    publicada_recentemente.admin_order_field = 'data_publicacao'
+    publicada_recentemente.boolean = True
+    publicada_recentemente.short_description = 'É recente?'
 
 class Opcao(models.Model):
     texto = models.CharField(max_length=100)
