@@ -1,29 +1,23 @@
-{% load static %}
+<html>
 
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <title>{% block title %} {% endblock %}</title>
-</head>
-<body>
-    <div class="menu">
-	    		<ul>
-	    			<a href="#"><li>ENTRAR</li></a>
-	    			<a href="#"><li>SERVIÇOS</li></a>
-	    			<a href="#"><li>PRODUTOS </li></a>
-	    			<a href="#"><li>SOBRE</li></a></a>
-	    			<a href="#"><li>HOME</li></a>
-	    		</ul>
-    </div>
-  {% block content %}
-   <form method="get" >
-            {% csrf_token %}
-            <input type="text">
-        </form>
-  {% endblock %}
+    <head>
 
-</body>
+        <title>Skambo</title>
+
+    </head>
+
+    <body>
+        <h1>Skambo</h1>
+        {% if anuncios  %}
+        <ul>
+            {% for anuncio in anuncios %}
+            <li><a href="/skambo/{{ anuncio.id }}">{{anuncio.descricao}}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <h3>Nenhum anuncio cadastrado</h3>
+        {% endif %}
+    </body>
+
+
 </html>
