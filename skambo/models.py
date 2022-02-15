@@ -2,6 +2,8 @@ from django.db import models
 
 class Usuario(models.Model):
     nome = models.CharField(max_length = 50)
+    def __str__(self):
+        return self.nome
 
 class Anuncio(models.Model):
     descricao = models.CharField(max_length=500)
@@ -13,6 +15,8 @@ class Anuncio(models.Model):
     imagem = models.ImageField(max_length=100)
     ativo = models.BooleanField()
     anunciante = models.ForeignKey(Usuario, on_delete = models.CASCADE)
+    def __str__(self):
+        return self.descricao
 
 ESTADO_PRODUTO = [
     (1, "novo"),
@@ -26,6 +30,7 @@ CATEGORIA_PRODUTO = [
     (2, "moveis"),
     (3, "eletronicos"),
     (4, "livros"),
+    (5, "beleza"),
 ]
 
 CATEGORIA_SERVICO = [
