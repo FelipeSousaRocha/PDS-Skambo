@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Anuncio
+from .models import Anuncio, Produto, Servico
 
 def skambo(request):
     #search = Produto.objects.filter(title__icontains)
-    anuncios = Anuncio.objects.order_by('-data')[:10]
+    produtos = Produto.objects.order_by('-data')[:10]
+    servicos = Servico.objects.order_by('-data')[:10]
     contexto = {
-        'anuncios': anuncios,
+        'anuncios': produtos,
+        'servicos': servicos,
         }
     return render(request, 'skambo/index.html', contexto)
 

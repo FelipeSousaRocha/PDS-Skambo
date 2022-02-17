@@ -12,11 +12,12 @@ class Anuncio(models.Model):
     contato = models.CharField(max_length=20)
     cidade = models.CharField(max_length=30)
     bairro = models.CharField(max_length=20)
-    imagem = models.ImageField(max_length=100)
+    imagem = models.ImageField(upload_to='media')
     ativo = models.BooleanField()
     anunciante = models.ForeignKey(Usuario, on_delete = models.CASCADE)
     def __str__(self):
         return self.descricao
+
 
 ESTADO_PRODUTO = [
     (1, "novo"),
@@ -46,15 +47,19 @@ class Produto(Anuncio):
     anos_de_uso = models.IntegerField()
     marca = models.CharField(max_length=20)
     categoria = models.IntegerField(choices = CATEGORIA_PRODUTO, default = 1)
+    def __str__(self):
+        return self.descricao
 
 class Servico(Anuncio):
     categoria = models.IntegerField(choices = CATEGORIA_SERVICO, default = 1)
+    def __str__(self):
+        return self.descricao
 
 class Proposta(models.Model):
     oferta = models.CharField(max_length = 200)
     data = models.DateField(auto_now_add = True)
     aceita = models.BooleanField()
-    imagem = models.ImageField(max_length=100)
+    imagem = models.ImageField(upload_to='media')
     proponente = models.ForeignKey(Usuario, on_delete = models.CASCADE)
     anuncio = models.ForeignKey(Anuncio, on_delete = models.CASCADE)
     data_da_troca = models.DateField(null = True)

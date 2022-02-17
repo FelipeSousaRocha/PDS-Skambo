@@ -14,7 +14,7 @@
       rel="stylesheet"
     />
 
-    <title>Pixie - Ecommerce HTML5 Template</title>
+    <title>Skambo</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css"
@@ -75,7 +75,7 @@ https://www.tooplate.com/view/2114-pixie
               <a class="nav-link" href="{% url 'skambo:about' %}">Sobre nós</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'skambo:products' %}">Contato</a>
+              <a class="nav-link" href="{% url 'skambo:contact' %}">Contato</a>
             </li>
           </ul>
         </div>
@@ -118,89 +118,77 @@ https://www.tooplate.com/view/2114-pixie
 
           <!-- Anuncios aqui -->
                {% if anuncios  %}
-            <ul>
+                <div class="featured container no-gutter">
+                    <div class="row posts">
                 {% for anuncio in anuncios %}
-                    <li>
+                    <div class="item new col-md-4">
+                        <div class="featured-item">
                         <a href="{% url 'skambo:anuncio' anuncio.id %}">
-                            {{ anuncio.descricao }}</a>
-                        </li>
+                            <img src="{{ anuncio.imagem.url }}"></a>
+                            <h4>{{ anuncio.descricao }}</h4>
+                            <strong>Interesses:</strong> <span>{{ anuncio.interesses }}</span>
+                            <br>
+                            <strong>Data:</strong> <span>{{ anuncio.data }}</span>
+                            <br>
+                            <strong>Contato:</strong> <span>{{ anuncio.contato }}</span>
+                            <br>
+                            <strong>Cidade:</strong> <span>{{ anuncio.cidade}}</span>
+                            <br>
+                            <strong>Bairro:</strong> <span>{{ anuncio.bairro}}</span>
+                            <br>
+                            <strong>Ativo:</strong> <span>{{ anuncio.ativo}}</span>
+                            <br>
+                            <strong>Anunciante:</strong> <span>{{ anuncio.anunciante}}</span>
+                            </div>
+                        </div>
                 {% endfor %}
-            </ul>
+                </div>
+           </div>
             {% else %}
                 <h3>Nenhum anuncio cadastrado</h3>
             {% endif %}
 
-        <!-- Produtos -->
+        <div class="featured-items">
+      <div class="container">
+        <div class="row">
           <div class="col-md-12">
-            <div class="owl-carousel owl-theme">
-              <a href="{% url 'skambo:singleproduct' %}">
-                <div class="featured-item">
-                  <img src="{% static 'skambo/images/item-01.jpg' %}" alt="Item 1" />
-                  <h4>Proin vel ligula</h4>
-                  <h6>$15.00</h6>
-                </div>
-              </a>
-              <a href="{% url 'skambo:singleproduct' %}">
-                <div class="featured-item">
-                  <img src="{% static 'skambo/images/item-02.jpg' %}" alt="Item 2" />
-                  <h4>Erat odio rhoncus</h4>
-                  <h6>$25.00</h6>
-                </div>
-              </a>
-              <a href="{% url 'skambo:singleproduct' %}">
-                <div class="featured-item">
-                  <img src="{% static 'skambo/images/item-03.jpg' %}" alt="Item 3" />
-                  <h4>Integer vel turpis</h4>
-                  <h6>$35.00</h6>
-                </div>
-              </a>
-              <a href="{% url 'skambo:singleproduct' %}">
-                <div class="featured-item">
-                  <img src="{% static 'skambo/images/item-04.jpg' %}" alt="Item 4" />
-                  <h4>Sed purus quam</h4>
-                  <h6>$45.00</h6>
-                </div>
-              </a>
-              <a href="{% url 'skambo:singleproduct' %}">
-                <div class="featured-item">
-                  <img src="{% static 'skambo/images/item-05.jpg' %}" alt="Item 5" />
-                  <h4>Morbi aliquet</h4>
-                  <h6>$55.00</h6>
-                </div>
-              </a>
-              <a href="{% url 'skambo:singleproduct' %}">
-                <div class="featured-item">
-                  <img src="{% static 'skambo/images/item-06.jpg' %}" alt="Item 6" />
-                  <h4>Urna ac diam</h4>
-                  <h6>$65.00</h6>
-                </div>
-              </a>
-              <a href="{% url 'skambo:singleproduct' %}">
-                <div class="featured-item">
-                  <img src="{% static 'skambo/images/item-04.jpg' %}" alt="Item 7" />
-                  <h4>Proin eget imperdiet</h4>
-                  <h6>$75.00</h6>
-                </div>
-              </a>
-              <a href="{% url 'skambo:singleproduct' %}">
-                <div class="featured-item">
-                  <img src="{% static 'skambo/images/item-05.jpg' %}" alt="Item 8" />
-                  <h4>Nullam risus nisl</h4>
-                  <h6>$85.00</h6>
-                </div>
-              </a>
-              <a href="{% url 'skambo:singleproduct' %}">
-                <div class="featured-item">
-                  <img src="{% static 'skambo/images/item-06.jpg' %}" alt="Item 9" />
-                  <h4>Cras tempus</h4>
-                  <h6>$95.00</h6>
-                </div>
-              </a>
+            <div class="section-heading">
+              <div class="line-dec"></div>
+              <h1>Serviços</h1>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+
+          <!-- Anuncios aqui -->
+               {% if servicos  %}
+                <div class="featured container no-gutter">
+                    <div class="row posts">
+                {% for anuncio in servicos %}
+                    <div class="item new col-md-4">
+                        <div class="featured-item">
+                        <a href="{% url 'skambo:anuncio' anuncio.id %}">
+                            <img src="{{ anuncio.imagem.url }}"></a>
+                            <h4>{{ anuncio.descricao }}</h4>
+                            <strong>Interesses:</strong> <span>{{ anuncio.interesses }}</span>
+                            <br>
+                            <strong>Data:</strong> <span>{{ anuncio.data }}</span>
+                            <br>
+                            <strong>Contato:</strong> <span>{{ anuncio.contato }}</span>
+                            <br>
+                            <strong>Cidade:</strong> <span>{{ anuncio.cidade}}</span>
+                            <br>
+                            <strong>Bairro:</strong> <span>{{ anuncio.bairro}}</span>
+                            <br>
+                            <strong>Ativo:</strong> <span>{{ anuncio.ativo}}</span>
+                            <br>
+                            <strong>Anunciante:</strong> <span>{{ anuncio.anunciante}}</span>
+                            </div>
+                        </div>
+                {% endfor %}
+                </div>
+           </div>
+            {% else %}
+                <h3>Nenhum anuncio cadastrado</h3>
+            {% endif %}
     <!-- Featred Ends Here -->
 
     <!-- Subscribe Form Starts Here -->

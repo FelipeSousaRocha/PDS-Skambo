@@ -21,14 +21,6 @@ class DetalhesView(generic.View):
         pergunta = get_object_or_404(Pergunta, pk = id_enquete)
         if pergunta.data_publicacao > timezone.now():
             raise Http404
-        """
-        try:
-            pergunta = Pergunta.objects.filter(
-            data_publicacao__lte = timezone.now()
-            ).get(pk=id_enquete)
-        except (Pergunta.DoesNotExist):
-            raise Htpp404
-        """
         return render(request, 'enquetes/enquete.html', {'pergunta': pergunta})
 
 class ResultadoView(generic.View):
