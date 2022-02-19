@@ -72,10 +72,16 @@ https://www.tooplate.com/view/2114-pixie
               <a class="nav-link" href="{% url 'skambo:products' %}">Produtos</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:services' %}">Serviços</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:about' %}">Sobre nós</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:contact' %}">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:contact' %}">Entrar</a>
             </li>
           </ul>
         </div>
@@ -116,36 +122,36 @@ https://www.tooplate.com/view/2114-pixie
             </div>
           </div>
 
-          <!-- Anuncios aqui -->
-               {% if anuncios  %}
+          <!-- Produtos aqui -->
+               {% if produtos  %}
                 <div class="featured container no-gutter">
                     <div class="row posts">
-                {% for anuncio in anuncios %}
+                {% for produto in produtos %}
                     <div class="item new col-md-4">
                         <div class="featured-item">
-                        <a href="{% url 'skambo:anuncio' anuncio.id %}">
-                            <img src="{{ anuncio.imagem.url }}"></a>
+                        <a href="{% url 'skambo:anuncio' produto.id %}">
+                            <img src="{{ produto.imagem.url }}"></a>
                             <h4>{{ anuncio.descricao }}</h4>
-                            <strong>Interesses:</strong> <span>{{ anuncio.interesses }}</span>
+                            <strong>Interesses:</strong> <span>{{ produto.interesses }}</span>
                             <br>
-                            <strong>Data:</strong> <span>{{ anuncio.data }}</span>
+                            <strong>Data:</strong> <span>{{ produto.data }}</span>
                             <br>
-                            <strong>Contato:</strong> <span>{{ anuncio.contato }}</span>
+                            <strong>Contato:</strong> <span>{{ produto.contato }}</span>
                             <br>
-                            <strong>Cidade:</strong> <span>{{ anuncio.cidade}}</span>
+                            <strong>Cidade:</strong> <span>{{ produto.cidade}}</span>
                             <br>
-                            <strong>Bairro:</strong> <span>{{ anuncio.bairro}}</span>
+                            <strong>Bairro:</strong> <span>{{ produto.bairro}}</span>
                             <br>
-                            <strong>Ativo:</strong> <span>{{ anuncio.ativo}}</span>
+                            <strong>Ativo:</strong> <span>{{ produto.ativo}}</span>
                             <br>
-                            <strong>Anunciante:</strong> <span>{{ anuncio.anunciante}}</span>
+                            <strong>Anunciante:</strong> <span>{{ produto.anunciante}}</span>
                             </div>
                         </div>
                 {% endfor %}
                 </div>
            </div>
             {% else %}
-                <h3>Nenhum anuncio cadastrado</h3>
+                <h3>Nenhum produto cadastrado</h3>
             {% endif %}
 
         <div class="featured-items">
@@ -187,7 +193,7 @@ https://www.tooplate.com/view/2114-pixie
                 </div>
            </div>
             {% else %}
-                <h3>Nenhum anuncio cadastrado</h3>
+                <h3>Nenhum serviço cadastrado</h3>
             {% endif %}
     <!-- Featred Ends Here -->
 

@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.skambo, name="index"),
     path('anuncio/<int:pk>/', views.anuncio, name="anuncio"),
     path('products/', views.products, name="products"),
+    path('services/', views.services, name="services"),
     path('singleproduct/', views.singleproduct, name="singleproduct"),
     path('contact/', views.contact, name="contact"),
     path('about/', views.about, name="about"),

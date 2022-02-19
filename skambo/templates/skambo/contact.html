@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -16,13 +17,13 @@
     <title>Pixie Template - Contact</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{% static 'skambo/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css" />
-    <link rel="stylesheet" href="assets/css/tooplate-main.css" />
-    <link rel="stylesheet" href="assets/css/owl.css" />
-    <link rel="stylesheet" href="assets/css/flex-slider.css" />
+    <link rel="stylesheet" href="{% static 'skambo/css/fontawesome.css' %}" />
+    <link rel="stylesheet" href="{% static 'skambo/css/tooplate-main.css' %}" />
+    <link rel="stylesheet" href="{% static 'skambo/css/owl.css' %}" />
+    <link rel="stylesheet" href="{% static 'skambo/css/flex-slider.css' %}" />
     <!--
 Tooplate 2114 Pixie
 https://www.tooplate.com/view/2114-pixie
@@ -44,8 +45,8 @@ https://www.tooplate.com/view/2114-pixie
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
       <div class="container">
-        <a class="navbar-brand" href="#"
-          ><img src="assets/images/header-logo.png" alt=""
+        <a href="#"
+          ><img id="logo" src="{% static 'skambo/images/header-logo.png' %}" alt=""
         /></a>
         <button
           class="navbar-toggler"
@@ -61,20 +62,25 @@ https://www.tooplate.com/view/2114-pixie
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="products.html"
-                >Products
-                <span class="sr-only">(current)</span>
+              <a class="nav-link" href="{% url 'skambo:index' %}"
+                >Início
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
+              <a class="nav-link" href="{% url 'skambo:products' %}">Produtos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:services' %}">Serviços</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:about' %}">Sobre nós</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="contact.html">Contact Us</a>
-              <span class="sr-only">(current)</span>
+              <a class="nav-link" href="{% url 'skambo:contact' %}">Contato
+               <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:contact' %}">Entrar</a>
             </li>
           </ul>
         </div>
@@ -89,7 +95,7 @@ https://www.tooplate.com/view/2114-pixie
           <div class="col-md-12">
             <div class="section-heading">
               <div class="line-dec"></div>
-              <h1>Contact Us</h1>
+              <h1>Contato</h1>
             </div>
           </div>
           <div class="col-md-6">
@@ -101,14 +107,11 @@ https://www.tooplate.com/view/2114-pixie
                            4. Copy only URL and paste it within the src="" field below
                     -->
 
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1197183.8373802372!2d-1.9415093691103689!3d6.781986417238027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdb96f349e85efd%3A0xb8d1e0b88af1f0f5!2sKumasi+Central+Market!5e0!3m2!1sen!2sth!4v1532967884907"
-                width="100%"
-                height="500px"
-                frameborder="0"
-                style="border: 0"
-                allowfullscreen
-              ></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d63510.8255888368!2d-35.272157508168604!3d-5.795263074886252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e6!4m3!3m2!1d-5.774303199999999!2d-35.2697794!4m5!1s0x7b2ffe4d7b15191%3A0x5c55d75db98a785e!2sifrn%20maps!3m2!1d-5.8118837999999995!2d-35.2035069!5e0!3m2!1spt-BR!2sbr!4v1645314218948!5m2!1spt-BR!2sbr"
+              width="100%"
+              height="500px"
+              style="border:0;"
+              allowfullscreen></iframe>
             </div>
           </div>
           <div class="col-md-6">
