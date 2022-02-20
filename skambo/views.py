@@ -32,8 +32,6 @@ def services(request):
 def about(request):
     return render(request, 'skambo/about.html')
 
-def contact(request):
-    return render(request, 'skambo/contact.html')
 
 def singleproduct(request):
     return render(request, 'skambo/single_product.html')

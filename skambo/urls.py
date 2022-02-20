@@ -10,7 +10,6 @@ urlpatterns = [
     path('products/', views.products, name="products"),
     path('services/', views.services, name="services"),
     path('singleproduct/', views.singleproduct, name="singleproduct"),
-    path('contact/', views.contact, name="contact"),
     path('about/', views.about, name="about"),
     #django-allauth
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
