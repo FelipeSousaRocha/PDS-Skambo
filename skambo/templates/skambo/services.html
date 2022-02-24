@@ -63,14 +63,14 @@ https://www.tooplate.com/view/2114-pixie
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:index' %}"
                 >Início
+                <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:products' %}">Produtos</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="{% url 'skambo:services' %}">Serviços
-              <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'skambo:services' %}">Serviços</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:about' %}">Sobre nós</a>
@@ -78,6 +78,13 @@ https://www.tooplate.com/view/2114-pixie
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:about' %}">Entrar</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:register' %}">Anunciar</a>
+            </li>
+            <div id="divBusca">
+              <input type="text" id="txtBusca" placeholder="Buscar..."/>
+              <!-- <img src="{% static 'skambo/images/lupa.png' %}" id="btnBusca" alt="Buscar"/> !-->
+            </div>
           </ul>
         </div>
       </div>
@@ -97,36 +104,40 @@ https://www.tooplate.com/view/2114-pixie
             </div>
           </div>
 
-          <!-- Produtos aqui -->
+          <!-- Serviços aqui -->
                {% if servicos  %}
                 <div class="featured container no-gutter">
                     <div class="row posts">
-                {% for servico in servicos %}
+                {% for anuncio in servicos %}
                     <div class="item new col-md-4">
                         <div class="featured-item">
-                        <a href="{% url 'skambo:anuncio' servico.id %}">
-                            <img src="{{ servico.imagem.url }}"></a>
-                            <h4>{{ servico.descricao }}</h4>
-                            <strong>Interesses:</strong> <span>{{ servico.interesses }}</span>
+                        <a href="{% url 'skambo:anuncio' anuncio.id %}">
+                            {% if anuncio.imagem %}
+                            <img src="{{ anuncio.imagem.url }}">
+                            {% else %}
+                            Sem imagem
+                            {% endif %}</a>
+                            <h4>{{ anuncio.descricao }}</h4>
+                            <strong>Interesses:</strong> <span>{{ anuncio.interesses }}</span>
                             <br>
-                            <strong>Data:</strong> <span>{{ servico.data }}</span>
+                            <strong>Data:</strong> <span>{{ anuncio.data }}</span>
                             <br>
-                            <strong>Contato:</strong> <span>{{ servico.contato }}</span>
+                            <strong>Contato:</strong> <span>{{ anuncio.contato }}</span>
                             <br>
-                            <strong>Cidade:</strong> <span>{{ servico.cidade}}</span>
+                            <strong>Cidade:</strong> <span>{{ anuncio.cidade}}</span>
                             <br>
-                            <strong>Bairro:</strong> <span>{{ servico.bairro}}</span>
+                            <strong>Bairro:</strong> <span>{{ anuncio.bairro}}</span>
                             <br>
-                            <strong>Ativo:</strong> <span>{{ servico.ativo}}</span>
+                            <strong>Ativo:</strong> <span>{{ anuncio.ativo}}</span>
                             <br>
-                            <strong>Anunciante:</strong> <span>{{ servico.anunciante}}</span>
+                            <strong>Anunciante:</strong> <span>{{ anuncio.anunciante}}</span>
                             </div>
                         </div>
                 {% endfor %}
                 </div>
            </div>
             {% else %}
-                <h3>Nenhum servico cadastrado</h3>
+                <h3>Nenhum serviço cadastrado</h3>
             {% endif %}
 
     <!-- Subscribe Form Starts Here -->

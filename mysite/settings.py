@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['felipesrocha.pythonanywhere.com']
 
+SITE_ID = 1
 
 # Application definition
 
@@ -121,18 +122,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-import os
-
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+STATIC_ROOT = '/home/felipesrocha/mysite/static'
 STATIC_URL = '/static/'
-
-MEDIA_ROOT = (
-  os.path.join(BASE_DIR, "media") #pasta media para abrigar os arquivos dos usuários
-)
-
+MEDIA_ROOT = '/home/felipesrocha/mysite/media'
 MEDIA_URL = '/media/' #endereço para acessar os arquivos
-

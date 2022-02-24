@@ -6,9 +6,48 @@ https://www.tooplate.com/view/2114-pixie
 
 */
 
+.form{
+    margin-top: 30px;
+    text-decoration: none;
+}
+
+.form a{
+    color: #4a4a4a;
+    margin-left: 30px;
+    font-size: 1.5rem;
+}
+
+.form a:hover{
+    color: #DEC312;
+}
+
+#divBusca{
+  background-color:#fff;
+  border:solid 1px;
+  border-radius:15px;
+  width:150px;
+  height:32px;
+}
+
+#txtBusca{
+  float:left;
+  background-color:transparent;
+  padding-left:5px;
+  font-style:italic;
+  font-size:18px;
+  border:none;
+  height:32px;
+  width:150px;
+}
+
+#btnBusca{
+    width: 15px;
+}
+
 #logo{
-    width: 300px;
-    height: 150px;
+    width: 220px;
+    height: 140px;
+    padding-bottom: 20px;
 }
 
 body {
@@ -100,6 +139,7 @@ a {
 	font-weight: 700;
 	color: #1e1e1e;
 	transition: all 0.5s;
+	padding: 0px 5px;
 }
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .active>.nav-link,
@@ -110,7 +150,7 @@ a {
 }
 .navbar:after {
 	width: 100%;
-	height: 1px;
+	height: 10px;
 	background-color: #DEC312;
 	content: '';
 	position: absolute;

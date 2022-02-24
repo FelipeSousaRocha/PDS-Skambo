@@ -38,7 +38,7 @@ class VotacaoView(generic.View):
         except (KeyError, Opcao.DoesNotExist):
             return render(request, 'enquetes/enquete.html', {
                 'pergunta': pergunta,
-                'error_message': "Uma opção precisa ser selecionada!",
+                'erro': "Uma opção precisa ser selecionada!",
             })
         op_votada.votos += 1
         op_votada.save()

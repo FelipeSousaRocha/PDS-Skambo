@@ -80,6 +80,13 @@ https://www.tooplate.com/view/2114-pixie
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:about' %}">Entrar</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:register' %}">Anunciar</a>
+            </li>
+            <div id="divBusca">
+              <input type="text" id="txtBusca" placeholder="Buscar..."/>
+              <!-- <img src="{% static 'skambo/images/lupa.png' %}" id="btnBusca" alt="Buscar"/> !-->
+            </div>
           </ul>
         </div>
       </div>
@@ -128,7 +135,7 @@ https://www.tooplate.com/view/2114-pixie
                         <div class="featured-item">
                         <a href="{% url 'skambo:anuncio' produto.id %}">
                             <img src="{{ produto.imagem.url }}"></a>
-                            <h4>{{ anuncio.descricao }}</h4>
+                            <h4>{{ produto.descricao }}</h4>
                             <strong>Interesses:</strong> <span>{{ produto.interesses }}</span>
                             <br>
                             <strong>Data:</strong> <span>{{ produto.data }}</span>
@@ -161,7 +168,7 @@ https://www.tooplate.com/view/2114-pixie
             </div>
           </div>
 
-          <!-- Anuncios aqui -->
+          <!-- Serviços aqui -->
                {% if servicos  %}
                 <div class="featured container no-gutter">
                     <div class="row posts">
@@ -169,7 +176,11 @@ https://www.tooplate.com/view/2114-pixie
                     <div class="item new col-md-4">
                         <div class="featured-item">
                         <a href="{% url 'skambo:anuncio' anuncio.id %}">
-                            <img src="{{ anuncio.imagem.url }}"></a>
+                            {% if anuncio.imagem %}
+                            <img src="{{ anuncio.imagem.url }}">
+                            {% else %}
+                            Sem imagem
+                            {% endif %}</a>
                             <h4>{{ anuncio.descricao }}</h4>
                             <strong>Interesses:</strong> <span>{{ anuncio.interesses }}</span>
                             <br>

@@ -7,9 +7,8 @@ app_name = 'skambo'
 urlpatterns = [
     path('', views.skambo, name="index"),
     path('anuncio/<int:pk>/', views.anuncio, name="anuncio"),
-    path('products/', views.products, name="products"),
-    path('services/', views.services, name="services"),
-    path('singleproduct/', views.singleproduct, name="singleproduct"),
+    path('products/', views.ProductsView.as_view(), name="products"),
+    path('services/', views.ServicesView.as_view(), name="services"),
     path('about/', views.about, name="about"),
-    #django-allauth
+    path('register/', views.RegisteradView.as_view(), name="register"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

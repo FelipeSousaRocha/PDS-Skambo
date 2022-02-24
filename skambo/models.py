@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 
 class Usuario(models.Model):
     nome = models.CharField(max_length = 50)
@@ -12,7 +13,7 @@ class Anuncio(models.Model):
     contato = models.CharField(max_length=20)
     cidade = models.CharField(max_length=30)
     bairro = models.CharField(max_length=20)
-    imagem = models.ImageField(upload_to='media')
+    imagem = models.ImageField(upload_to='media', null=True, blank=True)
     ativo = models.BooleanField()
     anunciante = models.ForeignKey(Usuario, on_delete = models.CASCADE)
     def __str__(self):
@@ -54,6 +55,14 @@ class Servico(Anuncio):
     categoria = models.IntegerField(choices = CATEGORIA_SERVICO, default = 1)
     def __str__(self):
         return self.descricao
+
+class ServicoForm(ModelForm):
+    class Meta:
+        model = Servico
+        fields = [
+            'descricao', 'interesses', 'contato', 'cidade', 'bairro',
+            'categoria', 'imagem'
+        ]
 
 class Proposta(models.Model):
     oferta = models.CharField(max_length = 200)

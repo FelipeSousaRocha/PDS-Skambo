@@ -63,11 +63,11 @@ https://www.tooplate.com/view/2114-pixie
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:index' %}"
                 >Início
+                <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="{% url 'skambo:products' %}">Produtos
-              <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'skambo:products' %}">Produtos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:services' %}">Serviços</a>
@@ -78,6 +78,13 @@ https://www.tooplate.com/view/2114-pixie
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:about' %}">Entrar</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:register' %}">Anunciar</a>
+            </li>
+            <div id="divBusca">
+              <input type="text" id="txtBusca" placeholder="Buscar..."/>
+              <!-- <img src="{% static 'skambo/images/lupa.png' %}" id="btnBusca" alt="Buscar"/> !-->
+            </div>
           </ul>
         </div>
       </div>

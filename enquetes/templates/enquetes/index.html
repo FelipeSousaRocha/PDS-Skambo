@@ -1,30 +1,22 @@
+{% extends 'enquetes/base.html' %}
 {% load static %}
 
-<html>
-    <head>
-        <title>App Enquetes</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'enquetes/css/styles.css' %}"/>
-    </head>
-    <body>
-        <h1>Aplicação Enquetes - Quiz La Casa de Papel - DSWeb 2021.2</h1>
+{% block titulo %}{% endblock %}
+
+{% block conteudo %}
         {% if ultimas_enquetes %}
+        {# Teste de comentário #}
             <ol>
                 {% for pergunta in ultimas_enquetes %}
                     <li><a href="{% url 'enquetes:detalhes' pergunta.id %}">
-                        {{ pergunta.texto }}</a>
+                        {{ pergunta.texto | truncatewords:100 }}</a>
                     </li>
                 {% endfor %}
             </ol>
-
-
         {% else %}
             <h3>Nenhuma enquete cadastrada até o momento!</h3>
         {% endif %}
-
-        <form method="get" action="{% url 'enquetes:cadastro' %}">
-            {% csrf_token %}
-            <input type="submit" value="Crie sua pergunta">
-        </form>
+{% endblock %}
 
     </body>
 </html>

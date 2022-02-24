@@ -1,12 +1,11 @@
-<html>
-    <head>
-        <title>App Enquete</title>
-    </head>
-    <body>
-        <h2>Enquete: {{ pergunta.texto }}</h2>
-        {% if error_message %}
-            <p><strong>{{ error_message }}</strong></p>
-        {% endif %}
+{% extends 'enquetes/base.html' %}
+{% load static %}
+
+{% block titulo %}<h3>Detalhes da enquete #{{ pergunta.id }}</h3>{% endblock %}
+
+{% block conteudo %}
+        <h2>Enquete: {{ pergunta.texto | title }}</h2>
+        <p><b>Data de publicação:</b>{{ pergunta.data_publicacao | date:"h:m, d/m/y" }}</p>
         <p><b>Escolha a opção desejada:</b></p>
         <form method="post" action="{% url 'enquetes:votacao' pergunta.id %}">
             {% csrf_token %}
@@ -23,7 +22,4 @@
             </ul>
             <input type="submit" value="Registre o seu voto">
         </form>
-        <hr/>
-        <a href="{% url 'enquetes:index' %}">Voltar</a>
-    </body>
-</html>
+{% endblock %}

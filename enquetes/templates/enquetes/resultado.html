@@ -1,10 +1,10 @@
-<html>
-    <head>
-        <title>App Enquete</title>
-    </head>
-    <body>
-        <h2>Enquete: {{ pergunta.texto }}</h2>
-        <p><b>O resultado parcial da enquete é o seguinte:</b></p>
+{% extends 'enquetes/base.html' %}
+{% load static %}
+
+{% block titulo %}<h2>Resultado parcial da enquete: #{{ pergunta.id }}</h2>{% endblock %}
+
+{% block conteudo %}
+<h4>Enquete: {{ pergunta.texto }}</h4>
         <ul>
             {% for opcao in pergunta.opcao_set.all %}
                 <li>{{ opcao.texto }} == {{ opcao.votos }}
@@ -13,7 +13,8 @@
             {% endfor %}
         </ul>
         <hr/>
-        <a href="{% url 'enquetes:index' %}">Voltar</a> |
+        {% block item_de_menu %}
         <a href="{% url 'enquetes:detalhes' pergunta.id %}">Votar novamente?</a>
-    </body>
-</html>
+        {% endblock %}
+
+{% endblock %}

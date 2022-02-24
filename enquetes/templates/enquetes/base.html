@@ -1,0 +1,37 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>App Enquetes</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'enquetes/css/styles.css' %}"/>
+    </head>
+    <body>
+        {% block titulo_principal %}
+        <h1>Aplicação Enquetes - Quiz La Casa de Papel - DSWeb 2021.2</h1>
+        {% endblock %}
+
+        {% block titulo %}<h3></h3>{% endblock %}
+
+        {% block mensagem_de_erro %}
+        {% if erro %}
+            <hr/>
+            <b class="erro">Erro: {{ erro }}</b>
+            <hr/>
+        {% endif %}
+        {% endblock %}
+
+        {% block conteudo %}
+        {% endblock %}
+
+        {% block menu %}
+        <a href="{% url 'enquetes:index' %}">Página principal</a>
+        <form method="get" action="{% url 'enquetes:cadastro' %}">
+            {% csrf_token %}
+            <input type="submit" value="Crie sua pergunta">
+        </form>
+        {% block itens_de_menu %}{% endblock %}
+        {% endblock %}
+        <br/>Copyright Enquetes|DSW 2021.2
+
+    </body>
+</html>
