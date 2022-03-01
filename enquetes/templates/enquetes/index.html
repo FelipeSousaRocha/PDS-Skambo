@@ -5,7 +5,6 @@
 
 {% block conteudo %}
         {% if ultimas_enquetes %}
-        {# Teste de comentário #}
             <ol>
                 {% for pergunta in ultimas_enquetes %}
                     <li><a href="{% url 'enquetes:detalhes' pergunta.id %}">
