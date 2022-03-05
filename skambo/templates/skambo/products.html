@@ -1,6 +1,58 @@
 {% extends 'skambo/base.html' %}
 {% load static %}
 
+    {% block navigation %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a href="#"
+          ><img id="logo" src="{% static 'skambo/images/header-logo.png' %}" alt=""
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:index' %}"
+                >Início
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'skambo:products' %}">Produtos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:services' %}">Serviços</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:about' %}">Sobre nós</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:about' %}">Entrar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:register' %}">Anunciar</a>
+            </li>
+            <div id="divBusca">
+              <input type="text" id="txtBusca" placeholder="Buscar..."/>
+              <!-- <img src="{% static 'skambo/images/lupa.png' %}" id="btnBusca" alt="Buscar"/> !-->
+            </div>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% endblock %}
+
     {% block conteudo %}
         <!-- Featured Starts Here -->
         <div class="featured-items">
@@ -21,8 +73,18 @@
                         <div class="item new col-md-4">
                             <div class="featured-item">
                             <a href="{% url 'skambo:anuncio' produto.id %}">
-                                <img src="{{ produto.imagem.url }}"></a>
+                                {% if produto.imagem %}
+                                <img src="{{ produto.imagem.url }}">
+                                {% else %}
+                                Sem imagem
+                                {% endif %}</a>
                                 <h4>{{ produto.descricao }}</h4>
+                                <strong>Marca:</strong> <span>{{ produto.marca }}</span>
+                                <br>
+                                <strong>Estado:</strong> <span>{{ produto.estado }}</span>
+                                <br>
+                                <strong>Anos de uso:</strong> <span>{{ produto.anos_de_uso }}</span>
+                                <br>
                                 <strong>Interesses:</strong> <span>{{ produto.interesses }}</span>
                                 <br>
                                 <strong>Data:</strong> <span>{{ produto.data }}</span>

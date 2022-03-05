@@ -10,5 +10,8 @@ urlpatterns = [
     path('products/', views.ProductsView.as_view(), name="products"),
     path('services/', views.ServicesView.as_view(), name="services"),
     path('about/', views.about, name="about"),
-    path('register/', views.RegisteradView.as_view(), name="register"),
+    path('register/', views.register, name="register"),
+    path('registerproduct/', views.RegisterProductView.as_view(), name="registerproduct"),
+    path('registerservice/', views.RegisterServiceView.as_view(), name="registerservice"),
+   # path('accounts/', include('djando.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

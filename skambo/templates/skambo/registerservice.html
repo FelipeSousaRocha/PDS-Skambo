@@ -46,6 +46,7 @@
               <input type="text" id="txtBusca" placeholder="Buscar..."/>
               <!-- <img src="{% static 'skambo/images/lupa.png' %}" id="btnBusca" alt="Buscar"/> !-->
             </div>
+
           </ul>
         </div>
       </div>
@@ -53,14 +54,22 @@
     {% endblock %}
 
     {% block conteudo %}
-        <h2>Anuncie aqui:</h2>
+        <h2>Criar anuncio</h2>
 
-        <div class="featured-item">
-                <a href="{% url 'skambo:registerproduct' %}">Criar produto</a>
-        </div>
-
-        <div class="featured-item">
-                <a href="{% url 'skambo:registerservice' %}">Criar servico</a>
-        </div>
+        <!-- Formulário serviços -->
+           <div class="form">{% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            {{ form.non_field_errors }}
+            <form method="post" enctype="multipart/form-data"
+                action="{% url 'skambo:registerservice' %}">
+                {% csrf_token %}
+                <div class="form-group form-check">
+                        {{ form.as_p }}
+                        <input type="submit" value="Cadastrar Serviço">
+                </div>
+            </form>
+            <br>
+            </div>
 
     {% endblock %}

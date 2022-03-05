@@ -44,8 +44,18 @@
                         <div class="item new col-md-4">
                             <div class="featured-item">
                             <a href="{% url 'skambo:anuncio' produto.id %}">
-                                <img src="{{ produto.imagem.url }}"></a>
+                                {% if produto.imagem %}
+                                <img src="{{ produto.imagem.url }}">
+                                {% else %}
+                                Sem imagem
+                                {% endif %}</a>
                                 <h4>{{ produto.descricao }}</h4>
+                                <strong>Marca:</strong> <span>{{ produto.marca }}</span>
+                                <br>
+                                <strong>Estado:</strong> <span>{{ produto.estado }}</span>
+                                <br>
+                                <strong>Anos de uso:</strong> <span>{{ produto.anos_de_uso }}</span>
+                                <br>
                                 <strong>Interesses:</strong> <span>{{ produto.interesses }}</span>
                                 <br>
                                 <strong>Data:</strong> <span>{{ produto.data }}</span>

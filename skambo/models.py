@@ -1,8 +1,16 @@
 from django.db import models
 from django.forms import ModelForm
+#from django.conf import settings
 
 class Usuario(models.Model):
     nome = models.CharField(max_length = 50)
+    #genero = models.CharField(max_length=100)
+    #descricao = models.TextField()
+    #usuario = models.OneToOneField(
+    #    settings.AUTH_USER_MODEL,
+    #    on_delete=models.CASCADE,
+	#null = True
+	#)
     def __str__(self):
         return self.nome
 
@@ -62,6 +70,14 @@ class ServicoForm(ModelForm):
         fields = [
             'descricao', 'interesses', 'contato', 'cidade', 'bairro',
             'categoria', 'imagem'
+        ]
+
+class ProdutoForm(ModelForm):
+    class Meta:
+        model = Produto
+        fields = [
+            'marca', 'descricao', 'interesses', 'contato', 'cidade', 'bairro',
+            'categoria', 'imagem', 'estado', 'anos_de_uso'
         ]
 
 class Proposta(models.Model):

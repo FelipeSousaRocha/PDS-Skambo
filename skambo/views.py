@@ -1,11 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Anuncio, Produto, Servico, ServicoForm, Usuario
+from .models import Anuncio, Produto, Servico, ServicoForm, Usuario, ProdutoForm
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+#from django.contrib.auth.decorators import login_required
+#from django.utils.decorators import method_decorator
+
+#@method_decorator(login_required, name='dispatch')
 
 def skambo(request):
-    #search = Produto.objects.filter(title__icontains)
     produtos = Produto.objects.order_by('-data')[:10]
     servicos = Servico.objects.order_by('-data')[:10]
     contexto = {
@@ -33,14 +36,33 @@ class ServicesView(generic.ListView):
 def about(request):
     return render(request, 'skambo/about.html')
 
-#def pesquisa(request):
-#    return render(request, 'skambo/search.html')
+class RegisterProductView(generic.View):
+    def get(self, request, *args, **kwargs):
+        form = ProdutoForm()
+        contexto = {'form': form}
+        return render(request, 'skambo/registerproduct.html', contexto)
+    def post(self, request, *args, **kwargs):
+        #recuperar parametros do formulario
+        form = ProdutoForm(request.POST, request.FILES)
+        if form.is_valid():
+            produto = form.save(commit=False)
+            # produto.anunciante = request.user.usuario
+            usuario = Usuario.objects.get(pk=1)
+            produto.anunciante = usuario
+            produto.ativo = True
+            produto.save()
+        else:
+            contexto = {'form': form}
+            return render(request, 'skambo/registerproduct.html', contexto)
+        return HttpResponseRedirect(
+            reverse('skambo:register', args=())
+        )
 
-class RegisteradView(generic.View):
+class RegisterServiceView(generic.View):
     def get(self, request, *args, **kwargs):
         form = ServicoForm()
         contexto = {'form': form}
-        return render(request, 'skambo/register.html', contexto)
+        return render(request, 'skambo/registerservice.html', contexto)
     def post(self, request, *args, **kwargs):
         #recuperar parametros do formulario
         form = ServicoForm(request.POST, request.FILES)
@@ -53,17 +75,13 @@ class RegisteradView(generic.View):
             servico.save()
         else:
             contexto = {'form': form}
-            return render(request, 'skambo/register.html', contexto)
-        #descricao = request.POST['descricao']
-        #interesses = request.POST['interesses']
-        #data = request.POST['data']
-        #contato = request.POST['contato']
-        #cidade = request.POST['cidade']
-        #bairro = request.POST['bairro']
-        #imagem = request.POST['imagem']
-
-        #a1 = Anuncio(descricao = descricao, interesses = interesses, data = data,contato = contato, cidade = cidade, bairro = bairro, imagem = imagem)
-        #a1.save()
+            return render(request, 'skambo/registerservice.html', contexto)
         return HttpResponseRedirect(
-            reverse('skambo:index', args=())
+            reverse('skambo:register', args=())
         )
+
+#def pesquisa(request):
+#    return render(request, 'skambo/search.html')
+
+def register(request):
+    return render(request, 'skambo/register.html')
