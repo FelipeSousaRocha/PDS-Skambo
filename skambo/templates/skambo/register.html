@@ -42,10 +42,12 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'skambo:register' %}">Anunciar</a>
             </li>
-            <div id="divBusca">
-              <input type="text" id="txtBusca" placeholder="Buscar..."/>
-              <!-- <img src="{% static 'skambo/images/lupa.png' %}" id="btnBusca" alt="Buscar"/> !-->
-            </div>
+            <form method="get" action="{% url 'skambo:search' %}">
+                <div id="divBusca">
+                  <input type="text" placeholder="Busque aqui" id="txtBusca" name="str_busca"/>
+                  <input type="submit" id="btnBusca" value="Pesquisar">
+                </div>
+            </form>
           </ul>
         </div>
       </div>

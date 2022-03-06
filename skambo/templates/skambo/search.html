@@ -1,0 +1,46 @@
+{% extends 'skambo/base.html' %}
+{% load static %}
+
+    {% block conteudo %}
+    <div class="featured-items">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section-heading">
+                    <div class="line-dec"></div>
+                    <h1>Busca realizada</h1>
+                    </div>
+                </div>
+        {% if anuncios %}
+                {% for anuncio in anuncios %}
+                    <div class="item new col-md-4">
+                            <div class="featured-item">
+                                <a href="{% url 'skambo:anuncio' anuncio.id %}">
+                                    {% if anuncio.imagem %}
+                                <img src="{{ anuncio.imagem.url }}">
+                                {% else %}
+                                Sem imagem
+                                {% endif %}</a>
+                                <h4>{{ anuncio.descricao | truncatewords:13 }}</h4>
+                                <strong>Interesses:</strong> <span>{{ anuncio.interesses }}</span>
+                                <br>
+                                <strong>Data:</strong> <span>{{ anuncio.data }}</span>
+                                <br>
+                                <strong>Contato:</strong> <span>{{ anuncio.contato }}</span>
+                                <br>
+                                <strong>Cidade:</strong> <span>{{ anuncio.cidade}}</span>
+                                <br>
+                                <strong>Bairro:</strong> <span>{{ anuncio.bairro}}</span>
+                                <br>
+                                <strong>Ativo:</strong> <span>{{ anuncio.ativo}}</span>
+                                <br>
+                                <strong>Anunciante:</strong> <span>{{ anuncio.anunciante}}</span>
+                            </div>
+                    </div>
+                {% endfor %}
+                </div>
+              </div>
+        {% else %}
+            <h3>Nenhum anuncio contendo o termo buscado</h3>
+        {% endif %}
+    {% endblock %}

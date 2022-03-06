@@ -3,6 +3,7 @@ from .models import Anuncio, Produto, Servico, ServicoForm, Usuario, ProdutoForm
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils import timezone
 #from django.contrib.auth.decorators import login_required
 #from django.utils.decorators import method_decorator
 
@@ -80,8 +81,14 @@ class RegisterServiceView(generic.View):
             reverse('skambo:register', args=())
         )
 
-#def pesquisa(request):
-#    return render(request, 'skambo/search.html')
+class SearchView(generic.View):
+    def get(self, request, *args, **kwargs):
+        str_busca = request.GET['str_busca']
+        anuncios = Anuncio.objects.filter(data__lte = timezone.now()).order_by('-data')
+        if str_busca:
+           anuncios = anuncios.filter(descricao__icontains = str_busca)
+        contexto = {'anuncios': anuncios,}
+        return render(request, 'skambo/search.html', contexto)
 
 def register(request):
     return render(request, 'skambo/register.html')
