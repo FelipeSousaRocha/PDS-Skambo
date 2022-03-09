@@ -22,5 +22,5 @@ urlpatterns = [
     path('skambo/', include('skambo.urls')),
     path('enquetes/', include('enquetes.urls')),
     # User Management
-    path("accounts/", include("allauth.urls")),
+    path("accounts/", include('django.contrib.auth.urls')),
 ]

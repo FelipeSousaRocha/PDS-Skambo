@@ -1,16 +1,21 @@
 from django.db import models
 from django.forms import ModelForm
-#from django.conf import settings
+from django.conf import settings
+
+GENERO = [
+    (1, "masculino"),
+    (2, "feminino")
+    ]
 
 class Usuario(models.Model):
     nome = models.CharField(max_length = 50)
-    #genero = models.CharField(max_length=100)
-    #descricao = models.TextField()
-    #usuario = models.OneToOneField(
-    #    settings.AUTH_USER_MODEL,
-    #    on_delete=models.CASCADE,
-	#null = True
-	#)
+    genero = models.IntegerField(choices = GENERO, default = 1)
+    descricao = models.TextField(blank=True, null=True)
+    usuario = models.OneToOneField(
+    settings.AUTH_USER_MODEL,
+    on_delete=models.CASCADE,
+	null = True
+	)
     def __str__(self):
         return self.nome
 
@@ -26,7 +31,6 @@ class Anuncio(models.Model):
     anunciante = models.ForeignKey(Usuario, on_delete = models.CASCADE)
     def __str__(self):
         return self.descricao
-
 
 ESTADO_PRODUTO = [
     (1, "novo"),
@@ -81,11 +85,15 @@ class ProdutoForm(ModelForm):
         ]
 
 class Proposta(models.Model):
-    oferta = models.CharField(max_length = 200)
+    proposta = models.ForeignKey(Anuncio, on_delete = models.CASCADE, related_name = "proposta")
     data = models.DateField(auto_now_add = True)
-    aceita = models.BooleanField()
+    aceita = models.BooleanField(null = True)
     imagem = models.ImageField(upload_to='media')
     proponente = models.ForeignKey(Usuario, on_delete = models.CASCADE)
-    anuncio = models.ForeignKey(Anuncio, on_delete = models.CASCADE)
+    oferta = models.ForeignKey(Anuncio, on_delete = models.CASCADE, related_name = "oferta")
     data_da_troca = models.DateField(null = True)
 
+class Skambo(models.Model):
+    data = models.DateField(auto_now_add = True)
+    anuncio_ofertado = models.ForeignKey(Anuncio, on_delete = models.CASCADE)
+    anuncio_aceito = models.ForeignKey(Anuncio, on_delete = models.CASCADE)

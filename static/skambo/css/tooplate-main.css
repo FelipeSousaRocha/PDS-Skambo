@@ -1,10 +1,42 @@
-/*
 
-Tooplate 2114 Pixie
+#title-login{
+    margin-left: 18px;
+}
 
-https://www.tooplate.com/view/2114-pixie
+.label{
+    display: flex;
+    align-items: center;
+    font-size: 1.125em;
+}
 
-*/
+.group{
+    margin: 0 2px;
+}
+
+#submit-button:hover{
+    background-color: #000;
+    color: #DEC312;
+}
+
+#submit-button {
+    margin-top: 8px;
+    padding: 5px 10px;
+    background: #DEC312;
+    color: black;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.form-control {
+    display: block;
+    border: 0 transparent;
+}
+
+.form-login{
+    margin: 30px 15px;
+    color: black;
+    padding: 15px;
+}
 
 .form{
     margin-top: 30px;
@@ -13,7 +45,6 @@ https://www.tooplate.com/view/2114-pixie
 
 .form a{
     color: #4a4a4a;
-    margin-left: 30px;
     font-size: 1.5rem;
 }
 
@@ -38,10 +69,12 @@ https://www.tooplate.com/view/2114-pixie
 	letter-spacing: 0.4px;
 	text-decoration: none;
 	transition: all 0.5s;
+	cursor: pointer;
 }
 
 #btnBusca:hover{
-    opacity: 0.7;
+    background-color: #000;
+    color: #DEC312;
 }
 
 #logo{
@@ -104,6 +137,12 @@ a {
 #pre-header {
 	background-color: #DEC312;
 	text-align: center;
+}
+#pre-header2{
+    background-color: black;
+	text-align: center;
+	color: #DEC312;
+	padding: 10px 0px;
 }
 #pre-header span {
 	color: black;

@@ -4,10 +4,11 @@ from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
-#from django.contrib.auth.decorators import login_required
-#from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
-#@method_decorator(login_required, name='dispatch')
+def proposal(request):
+    return render(request, 'skambo/proposal.html')
 
 def skambo(request):
     produtos = Produto.objects.order_by('-data')[:10]
@@ -37,6 +38,7 @@ class ServicesView(generic.ListView):
 def about(request):
     return render(request, 'skambo/about.html')
 
+@method_decorator(login_required, name='dispatch')
 class RegisterProductView(generic.View):
     def get(self, request, *args, **kwargs):
         form = ProdutoForm()
@@ -59,6 +61,7 @@ class RegisterProductView(generic.View):
             reverse('skambo:register', args=())
         )
 
+@method_decorator(login_required, name='dispatch')
 class RegisterServiceView(generic.View):
     def get(self, request, *args, **kwargs):
         form = ServicoForm()

@@ -1,0 +1,44 @@
+{% extends 'skambo/base.html' %}
+{% load static %}
+
+    {% block conteudo %}
+    <br>
+    <br>
+    <br>
+    <h1 id="title-login">Página de login</h1>
+
+        {% if form.errors %}
+            <p>Login e senha inválidos</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>Sua conta não possui autorização para acessar essa página</p>
+            {% else %}
+            <p>Por favor, faça login para acessar essa página</p>
+            {% endif %}
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <h2 id="title-login">{{ user.username }} já está conectado!</h2>
+        {% else %}
+            <div class="form-login">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <table>
+                        <tr class="group">
+                            <td class="label">Usuário:</td>
+                            <td class="form-control">{{ form.username }}</td>
+                        </tr>
+                        <tr class="group">
+                            <td class="label">Senha:</td>
+                            <td class="form-control">{{ form.password }}</td>
+                        </tr>
+                    </table>
+                    <input id="submit-button" type="submit" value="Logar">
+                    <input type="hidden" name="next" value="{{ next }}">
+                </form>
+            </div>
+        {% endif %}
+    {% endblock %}
+

@@ -15,7 +15,11 @@
               </div>
               <div class="col-md-6">
                   <div class="featured-item">
-                        <img src="{{ anuncio.imagem.url }}">
+                      {% if anuncio.imagem %}
+                                <img src="{{ anuncio.imagem.url }}">
+                                {% else %}
+                                Sem imagem
+                                {% endif %}
                   </div>
               </div>
 
@@ -30,7 +34,7 @@
                     commodo turpis id, dignissim leo. Suspendisse mauris massa,
                     porttitor non fermentum vel, ullamcorper scelerisque velit.
                   </p>
-                  <form action="" method="get">
+                  <form action="{% url 'skambo:proposal' %}" method="get">
                     <input type="submit" class="button" value="Realizar skambo!" />
                   </form>
                   <div class="down-content">

@@ -46,6 +46,23 @@
     </div>
     {% endblock %}
 
+    {% block header %}
+        {% if user.is_authenticated %}
+            <div id="pre-header2">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h4>Usuário: {{ user.username }}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        {% else %}
+            | <a href="{% url 'login' %}?next={% url 'enquetes:index' %}">Entrar</a>
+        {% endif %}
+    {% endblock %}
+
     {% block navigation %}
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
@@ -81,9 +98,16 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:about' %}">Sobre nós</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'skambo:about' %}">Entrar</a>
+                <a class="nav-link" href="{% url 'logout' %}?next={% url 'skambo:index' %}">Sair</a>
             </li>
+            {% else %}
+                <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}?next={% url 'skambo:index' %}">Entrar</a>
+                </li>
+            {% endif %}
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:register' %}">Anunciar</a>
             </li>
