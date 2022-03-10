@@ -8,6 +8,12 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 def proposal(request):
+    #produtos = Produto.objects.order_by('-data')
+    #servicos = Servico.objects.order_by('-data')
+    #contexto = {
+    #    'produtos': produtos,
+    #    'servicos': servicos,
+    #   }
     return render(request, 'skambo/proposal.html')
 
 def skambo(request):

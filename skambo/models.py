@@ -85,15 +85,45 @@ class ProdutoForm(ModelForm):
         ]
 
 class Proposta(models.Model):
-    proposta = models.ForeignKey(Anuncio, on_delete = models.CASCADE, related_name = "proposta")
+    #proposta = models.ForeignKey(Anuncio, on_delete = models.CASCADE, related_name = "proposta")
     data = models.DateField(auto_now_add = True)
     aceita = models.BooleanField(null = True)
     imagem = models.ImageField(upload_to='media')
     proponente = models.ForeignKey(Usuario, on_delete = models.CASCADE)
-    oferta = models.ForeignKey(Anuncio, on_delete = models.CASCADE, related_name = "oferta")
+    #oferta = models.ForeignKey(Anuncio, on_delete = models.CASCADE, related_name = "oferta")
     data_da_troca = models.DateField(null = True)
 
-class Skambo(models.Model):
+
+"""
+class PropostaForm(ModelForm):
+    class Meta:
+        model = Proposta
+       fields = [
+            'proposta',
+        ]
+"""
+
+"""
+class PropostaView(generic.View):
+    def post(self, request, *args, **kwargs):
+        id_anuncio = kwargs['pk']
+        anuncio = get_object_or_404(Anuncio, pk = id_anuncio)
+        try:
+            op_votada = anuncio.opcao_set.get(pk = request.POST['opcao'])
+        except (KeyError, Opcao.DoesNotExist):
+            return render(request, 'skambo/anuncio.html', {
+                'anuncio': anuncio,
+                'erro': "Uma opção precisa ser selecionada!",
+            })
+        op_votada.save()
+        return HttpResponseRedirect(
+            reverse('skambo:troca', args=(anuncio.id,))
+)
+"""
+
+"""
+class Troca(models.Model):
     data = models.DateField(auto_now_add = True)
     anuncio_ofertado = models.ForeignKey(Anuncio, on_delete = models.CASCADE)
     anuncio_aceito = models.ForeignKey(Anuncio, on_delete = models.CASCADE)
+"""

@@ -36,9 +36,15 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'skambo:about' %}">Sobre nós</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                <a class="nav-link" href="{% url 'logout' %}?next={% url 'skambo:index' %}">Sair</a>
             </li>
+            {% else %}
+                <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}?next={% url 'skambo:index' %}">Entrar</a>
+                </li>
+            {% endif %}
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'skambo:register' %}">Anunciar</a>
             </li>
