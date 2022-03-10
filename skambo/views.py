@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Anuncio, Produto, Servico, ServicoForm, Usuario, ProdutoForm, PropostaForm
+from .models import Anuncio, Produto, Servico, ServicoForm, Usuario, ProdutoForm, PropostaForm, TrocaForm
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -95,6 +95,24 @@ class ProposalView(generic.View):
         else:
             contexto = {'form': form}
             return render(request, 'skambo/proposal.html', contexto)
+        return HttpResponseRedirect(
+            reverse('skambo:anuncio', args=())
+        )
+
+class TrocaView(generic.View):
+    def get(self, request, *args, **kwargs):
+        form = TrocaForm()
+        contexto = {'form': form}
+        return render(request, 'skambo/troca.html', contexto)
+    def post(self, request, *args, **kwargs):
+        #recuperar parametros do formulario
+        form = TrocaForm(request.POST, request.FILES)
+        if form.is_valid():
+            troca = form.save(commit=False)
+            troca.save()
+        else:
+            contexto = {'form': form}
+            return render(request, 'skambo/troca.html', contexto)
         return HttpResponseRedirect(
             reverse('skambo:anuncio', args=())
         )

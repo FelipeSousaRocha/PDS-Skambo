@@ -11,6 +11,7 @@ urlpatterns = [
     path('services/', views.ServicesView.as_view(), name="services"),
     path('about/', views.about, name="about"),
     path('proposal/', views.ProposalView.as_view(), name="proposal"),
+    path('troca/', views.TrocaView.as_view(), name="troca"),
     path('register/', views.register, name="register"),
     path('registerproduct/', views.RegisterProductView.as_view(), name="registerproduct"),
     path('registerservice/', views.RegisterServiceView.as_view(), name="registerservice"),

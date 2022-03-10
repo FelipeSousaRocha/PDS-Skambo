@@ -36,6 +36,12 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'skambo:about' %}">Sobre nós</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:register' %}">Anunciar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'skambo:troca' %}">Skambo</a>
+            </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}?next={% url 'skambo:index' %}">Sair</a>
@@ -45,9 +51,7 @@
                       <a class="nav-link" href="{% url 'login' %}?next={% url 'skambo:index' %}">Entrar</a>
                 </li>
             {% endif %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'skambo:register' %}">Anunciar</a>
-            </li>
+
             <form method="get" action="{% url 'skambo:search' %}">
                 <div id="divBusca">
                   <input type="text" placeholder="Busque aqui" id="txtBusca" name="str_busca"/>

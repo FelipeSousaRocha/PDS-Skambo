@@ -115,22 +115,9 @@ class Troca(models.Model):
         related_name='trocas_envidas'
     )
 
-
-"""
-class PropostaView(generic.View):
-    def post(self, request, *args, **kwargs):
-        id_anuncio = kwargs['pk']
-        anuncio = get_object_or_404(Anuncio, pk = id_anuncio)
-        try:
-            op_votada = anuncio.opcao_set.get(pk = request.POST['opcao'])
-        except (KeyError, Opcao.DoesNotExist):
-            return render(request, 'skambo/anuncio.html', {
-                'anuncio': anuncio,
-                'erro': "Uma opção precisa ser selecionada!",
-            })
-        op_votada.save()
-        return HttpResponseRedirect(
-            reverse('skambo:troca', args=(anuncio.id,))
-)
-"""
-
+class TrocaForm(ModelForm):
+    class Meta:
+        model = Troca
+        fields = [
+            'anuncio_desejado', 'anuncio_proposto'
+        ]
