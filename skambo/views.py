@@ -1,20 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Anuncio, Produto, Servico, ServicoForm, Usuario, ProdutoForm
+from .models import Anuncio, Produto, Servico, ServicoForm, Usuario, ProdutoForm, PropostaForm
 from django.views import generic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
-def proposal(request):
-    #produtos = Produto.objects.order_by('-data')
-    #servicos = Servico.objects.order_by('-data')
-    #contexto = {
-    #    'produtos': produtos,
-    #    'servicos': servicos,
-    #   }
-    return render(request, 'skambo/proposal.html')
 
 def skambo(request):
     produtos = Produto.objects.order_by('-data')[:10]
@@ -88,6 +79,24 @@ class RegisterServiceView(generic.View):
             return render(request, 'skambo/registerservice.html', contexto)
         return HttpResponseRedirect(
             reverse('skambo:register', args=())
+        )
+
+class ProposalView(generic.View):
+    def get(self, request, *args, **kwargs):
+        form = PropostaForm()
+        contexto = {'form': form}
+        return render(request, 'skambo/proposal.html', contexto)
+    def post(self, request, *args, **kwargs):
+        #recuperar parametros do formulario
+        form = PropostaForm(request.POST, request.FILES)
+        if form.is_valid():
+            proposta = form.save(commit=False)
+            proposta.save()
+        else:
+            contexto = {'form': form}
+            return render(request, 'skambo/proposal.html', contexto)
+        return HttpResponseRedirect(
+            reverse('skambo:anuncio', args=())
         )
 
 class SearchView(generic.View):

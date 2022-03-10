@@ -4,7 +4,22 @@
     {% block conteudo %}
         <h2>Confirmar Skambo</h2>
         <br>
-        <h3>Escolha o Produto ou Serviço que deseja trocar</h3>
+
+        <!-- Formulário proposta -->
+           <div class="form">{% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            {{ form.non_field_errors }}
+            <form method="post" enctype="multipart/form-data"
+                action="{% url 'skambo:proposal' %}">
+                {% csrf_token %}
+                <div class="form-group form-check">
+                        {{ form.as_p }}
+                        <input type="submit" value="Enviar proposta">
+                </div>
+            </form>
+            <br>
+            </div>
 
         <br>
     {% endblock %}

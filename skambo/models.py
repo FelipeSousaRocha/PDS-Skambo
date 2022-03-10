@@ -85,23 +85,36 @@ class ProdutoForm(ModelForm):
         ]
 
 class Proposta(models.Model):
-    #proposta = models.ForeignKey(Anuncio, on_delete = models.CASCADE, related_name = "proposta")
+    anuncio_ofertado = models.ForeignKey(
+        Anuncio, on_delete = models.CASCADE, null=True,
+        related_name = "propostas_recebidas"
+    )
+    anuncio_proposto = models.ForeignKey(
+        Anuncio, on_delete = models.CASCADE, null=True,
+        related_name = "propostas_enviadas"
+    )
     data = models.DateField(auto_now_add = True)
+    respondida = models.BooleanField(default = False)
     aceita = models.BooleanField(null = True)
-    imagem = models.ImageField(upload_to='media')
-    proponente = models.ForeignKey(Usuario, on_delete = models.CASCADE)
-    #oferta = models.ForeignKey(Anuncio, on_delete = models.CASCADE, related_name = "oferta")
-    data_da_troca = models.DateField(null = True)
 
-
-"""
 class PropostaForm(ModelForm):
     class Meta:
         model = Proposta
-       fields = [
-            'proposta',
+        fields = [
+            'anuncio_ofertado', 'anuncio_proposto'
         ]
-"""
+
+class Troca(models.Model):
+    data = models.DateField(auto_now_add = True)
+    anuncio_desejado = models.ForeignKey(
+        Anuncio, on_delete = models.CASCADE,
+        related_name='trocas_recebidas'
+    )
+    anuncio_proposto = models.ForeignKey(
+        Anuncio, on_delete = models.CASCADE,
+        related_name='trocas_envidas'
+    )
+
 
 """
 class PropostaView(generic.View):
@@ -121,9 +134,3 @@ class PropostaView(generic.View):
 )
 """
 
-"""
-class Troca(models.Model):
-    data = models.DateField(auto_now_add = True)
-    anuncio_ofertado = models.ForeignKey(Anuncio, on_delete = models.CASCADE)
-    anuncio_aceito = models.ForeignKey(Anuncio, on_delete = models.CASCADE)
-"""
