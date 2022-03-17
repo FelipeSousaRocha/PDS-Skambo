@@ -1,5 +1,6 @@
 import datetime
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 
 class Rotulo(models.Model):
@@ -11,9 +12,13 @@ class Rotulo(models.Model):
 
 class Autor(models.Model):
     nome = models.CharField(max_length=80)
-    genero = models.CharField(max_length=100,null=True)
+    genero = models.CharField(max_length=100, null=True)
     descricao = models.TextField()
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null = True
+    )
     class Meta:
         verbose_name_plural = 'Autores'
     def __str__(self):
@@ -22,9 +27,9 @@ class Autor(models.Model):
 class Pergunta(models.Model):
     texto = models.CharField(max_length=200, unique=True)
     data_publicacao = models.DateTimeField('Data de publicação')
-    imagem = models.ImageField(upload_to='enquetes',null=True, blank=True)
-    data_encerramento = models.DateField(null=True)
-    rotulos = models.ManyToManyField(Rotulo)
+    data_encerramento = models.DateField('Encerramento', null=True)
+    imagem = models.ImageField(upload_to='enquetes', null=True, blank=True)
+    rotulos = models.ManyToManyField(Rotulo, verbose_name='Rótulos')
     autor = models.ForeignKey(Autor, on_delete=models.CASCADE, null=True)
     def __str__(self):
         return self.texto
@@ -34,6 +39,11 @@ class Pergunta(models.Model):
     publicada_recentemente.admin_order_field = 'data_publicacao'
     publicada_recentemente.boolean = True
     publicada_recentemente.short_description = 'É recente?'
+    def total_de_votos(self):
+        total = 0
+        for op in self.opcao_set.all():
+            total += op.votos
+        return total
 
 class Opcao(models.Model):
     texto = models.CharField(max_length=100)
@@ -42,5 +52,7 @@ class Opcao(models.Model):
     def __str__(self):
         return self.texto
     class Meta:
-        verbose_name_plural = 'Opções'
-
+        verbose_name_plural = "Opções"
+    def porcentagem(self):
+        total = self.pergunta.total_de_votos()
+        return (self.votos / total)*100

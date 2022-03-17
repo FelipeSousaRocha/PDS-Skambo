@@ -4,22 +4,27 @@
     {% block conteudo %}
         <h2>Proposta</h2>
         <br>
-
         <!-- Formulário proposta -->
            <div class="form">{% if error_message %}
                 <p><strong>{{ error_message }}</strong></p>
             {% endif %}
             {{ form.non_field_errors }}
             <form method="post" enctype="multipart/form-data"
-                action="{% url 'skambo:proposal' %}">
+                action="{% url 'skambo:proposal' anuncio.id %}">
+                <p>Anuncio Desejado: {{ anuncio.descricao }}</p>
                 {% csrf_token %}
-                <div class="form-group form-check">
-                        {{ form.as_p }}
-                        <input type="submit" value="Enviar proposta">
-                </div>
+                <select name="proposta">
+                    {% for an in user.usuario.anuncio_set.all %}
+                        <option value="{{ an.id }}">
+                            {{ an.descricao }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Registrar proposta">
             </form>
             <br>
             </div>
+
 
         <br>
     {% endblock %}

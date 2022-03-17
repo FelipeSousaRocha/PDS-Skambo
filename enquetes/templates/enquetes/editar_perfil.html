@@ -1,0 +1,31 @@
+{% extends 'enquetes/base.html'%}
+{% load static %}
+
+{% block titulo %}
+    <h3>Edição de Perfil do Usuário "{{ user.username }}"</h3>
+{% endblock %}
+
+{% block conteudo %}
+        <form method="post" action="{% url 'enquetes:editar_perfil' user.autor.id %}">
+            {% csrf_token %}
+            Nome: <input type="text" name="nome" size="30"
+                value="{{ user.first_name }}"><br/>
+            Sobrenome: <input type="text" name="sobrenome" size="30"
+                value="{{ user.last_name }}"><br/>
+            E-mail: <input type="email" name="email"
+                value="{{ user.email }}"><br/>
+            Gênero: <input type="text" name="genero" size="43"
+                value="{{ user.autor.genero }}"><br/>
+            Descrição:<br/>
+            <textarea name="descricao" cols="50">{{ user.autor.descricao }}</textarea>
+            <br/>
+            <fieldset>
+                <legend>Alterar senha para o usuário {{ user.username }}: </legend>
+                <b>Obs.: a alteração da senha causa o logout do usuário.</b><br/>
+                Informe a Senha: <input type="password" name="senha1"><br/>
+                Repita a Senha: <input type="password" name="senha2"><br/>
+            </fieldset>
+
+            <input type="submit" value="Atualizar Cadastro">
+        </form>
+{% endblock %}

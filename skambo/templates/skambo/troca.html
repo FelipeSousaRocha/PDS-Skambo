@@ -3,11 +3,31 @@
 
     {% block conteudo %}
         <h3>Veja as propostas que foram feitas a você!</h3>
+        <!-- Propostas aqui -->
         <br>
         <br>
-        <h2>Obrigado por usar nossos serviços.</h2>
+        <ul>
+            {% for an in user.usuario.anuncio_set.all %}
+                <li>
+                    {{ an.descricao }}
+                    <ul>
+                        {% for proposta in an.propostas_em_aberto %}
+                        <form method="post" action="{% url 'skambo:troca' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="id_proposta" value="{{ proposta.id }}">
+                            <li>{{ proposta.anuncio_proposto.descricao }}</li>
+                            <input type="submit" value="Aceitar" name="resposta">
+                            <input type="submit" value="Recusar" nama="resposta">
+                        </form>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h3><a class="troca" href="{% url 'skambo:trocas' %}">Trocas já realizadas</a></h3>
+        <h2 class="trocas">Obrigado por usar nossos serviços.</h2>
         <br>
-        <br>
-        <br>
-        <br>
+
+
     {% endblock %}

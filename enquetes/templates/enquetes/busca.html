@@ -1,0 +1,18 @@
+{% extends 'enquetes/base.html' %}
+{% load static %}
+
+{%block titulo %}<h3>Resultado da Busca</h3>{% endblock %}
+
+{% block conteudo %}
+    {% if enquetes %}
+        <ul>
+            {% for pergunta in enquetes %}
+                <li><a href="{% url 'enquetes:detalhes' pergunta.id %}">
+                    {{ pergunta.texto | truncatewords:13 }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>Nenhuma enquete contendo o termo buscado</h3>
+    {% endif %}
+{% endblock %}

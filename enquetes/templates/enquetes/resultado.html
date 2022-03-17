@@ -1,20 +1,38 @@
 {% extends 'enquetes/base.html' %}
 {% load static %}
 
-{% block titulo %}<h2>Resultado parcial da enquete: #{{ pergunta.id }}</h2>{% endblock %}
+    {% block titulo %}<h2>Resultado parcial da enquete: #{{ pergunta.id }}</h2>{% endblock %}
 
-{% block conteudo %}
-<h4>Enquete: {{ pergunta.texto }}</h4>
-        <ul>
-            {% for opcao in pergunta.opcao_set.all %}
-                <li>{{ opcao.texto }} == {{ opcao.votos }}
-                    voto{{ opcao.votos | pluralize }}
-                </li>
-            {% endfor %}
-        </ul>
-        <hr/>
-        {% block item_de_menu %}
-        <a href="{% url 'enquetes:detalhes' pergunta.id %}">Votar novamente?</a>
-        {% endblock %}
+    {% block conteudo %}
+        <h4>Enquete: {{ pergunta.texto }}</h4>
+            <ul>
+                {% for opcao in pergunta.opcao_set.all %}
+                    <li>{{ opcao.texto }} == {{ opcao.votos }}
+                        voto{{ opcao.votos | pluralize }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <hr/>
+            <h4>Detalhes da Enquete:</h4>
+            <b>Autor:</b>
+            <a href="{% url 'enquetes:autor' pergunta.autor.id %}">
+                {{ pergunta.autor.nome }}
+            </a><br/>
+            <b>Rótulos:</b>
+            {% for rotulo in pergunta.rotulos.all %}
+                <a href="{% url 'enquetes:rotulo' rotulo.id %}">
+                {{ rotulo.titulo }}</a>{% if forloop.counter < pergunta.rotulos.count %};
+                {% endif %}
+            {% endfor %}<br/>
+            <b>Data de publicação:</b>
+            {{ pergunta.data_publicacao | date:"d/m/Y"}}<br/>
+            <b>Data de encerramento:</b>
+            {{ pergunta.data_encerramento | date:"d/m/Y"}}<br/>
 
-{% endblock %}
+
+    {% endblock %}
+
+    {% block menu %}
+        {{ block.super }}
+        | <a href="{% url 'enquetes:detalhes' pergunta.id %}">Votar novamente?</a>
+    {% endblock %}

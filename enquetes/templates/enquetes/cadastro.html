@@ -1,32 +1,35 @@
-{% extends 'enquetes/base.html' %}
+{% extends 'enquetes/base.html'%}
 {% load static %}
 
-{% block titulo %}<h2>Criar enquete - DSWeb 2021.2</h2>{% endblock %}
+{% block titulo %}<h3>Cadastramento de Enquete</h3>{% endblock %}
 
 {% block conteudo %}
         <form method="post" action="{% url 'enquetes:cadastro' %}">
             {% csrf_token %}
             <p>Enunciado da enquete:
             <input type="text" name="texto" size="70">*</p>
-            <b>Alternativas obrigatórias</b>
-            <label for="texto">Pergunta</label><input type="text" name="texto">*
-            <br>
-            <label for="op1">Opção1</label><input type="text" name="op1">*
-            <br>
-            <label for="op2">Opção2</label><input type="text" name="op2">
-            <br>
-            <label for="op3">Opção3</label><input type="text" name="op3">
-            <br>
-            <label for="op4">Opção4</label><input type="text" name="op4">
-            <br>
-            <label for="op5">Opção5</label><input type="text" name="op5">
-            <br>
-            <label for="op6">Opção6</label><input type="text" name="op6">
-            <br>
-            <input type="submit" value="Cadastrar pergunta">
+            <b>Alternativas (as duas primeiras são obrigatórias):</b><br/>
+            (1) <input type="text" name="op1" size="45">*<br/>
+            (2) <input type="text" name="op2" size="45">*<br/>
+            (3) <input type="text" name="op3" size="45"><br/>
+            (4) <input type="text" name="op4" size="45"><br/>
+            (5) <input type="text" name="op5" size="45"><br/>
+            (6) <input type="text" name="op6" size="45"><br/>
+            Data de encerramento:
+            <input type="date" name="encerramento">*<br/>
+            {% if rotulos %}
+                Selecione os rótulos correspondentes:
+                <ul>
+                    {% for r in rotulos %}
+                        <input type="checkbox" id="r{{ forloop.counter }}"
+                               name="rotulos" value="{{ r.id }}"/>
+                        <label for="r{{ forloop.counter }}">{{ r.titulo }}
+                        </label>
+                        <br/>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <input type="submit" value="Cadastrar Enquete">
         </form>
-        <br>
+        <p><b>Obs.:</b> "*" campos obirgatórios.</p>
 {% endblock %}
-
-    </body>
-</html>

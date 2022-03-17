@@ -3,19 +3,20 @@
 <html>
     <head>
         <title>App Enquetes</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'enquetes/css/styles.css' %}"/>
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'enquetes/css/styles.css' %}"/>
     </head>
     <body>
         {% block titulo_principal %}
-        <h1>Aplicação Enquetes - Quiz La Casa de Papel - DSWeb 2021.2</h1>
+        <h1>Aplicação Enquetes - DSWeb 2021.2</h1>
         {% endblock %}
 
-        {% block titulo %}<h3></h3>{% endblock %}
+        {% block titulo %}{% endblock %}
 
         {% block mensagem_de_erro %}
         {% if erro %}
             <hr/>
-            <b class="erro">Erro: {{ erro }}</b>
+            <b class="erro">ERRO: {{ erro }}</b>
             <hr/>
         {% endif %}
         {% endblock %}
@@ -24,14 +25,20 @@
         {% endblock %}
 
         {% block menu %}
-        <a href="{% url 'enquetes:index' %}">Página principal</a>
-        <form method="get" action="{% url 'enquetes:cadastro' %}">
-            {% csrf_token %}
-            <input type="submit" value="Crie sua pergunta">
-        </form>
+        <hr/>
+        <a href="{% url 'enquetes:index' %}">Principal</a> |
+        <a href="{% url 'enquetes:encerradas' %}">Resultados</a> |
+        <a href="{% url 'enquetes:cadastro' %}">(+) Nova enquete</a> |
+        <a href="{% url 'admin:index' %}">Administração</a>
+        {% if user.is_authenticated %}
+            | Usuário: <a href="{% url 'enquetes:autor' user.autor.id %}">
+            {{ user.username }}</a>
+            | <a href="{% url 'logout' %}?next={% url 'enquetes:index' %}">Logout</a>
+        {% else %}
+            | <a href="{% url 'login' %}?next={% url 'enquetes:index' %}">Login</a>
+        {% endif %}
         {% block itens_de_menu %}{% endblock %}
         {% endblock %}
-        <br/>Copyright Enquetes|DSW 2021.2
-
+        <br />&copy; Copyrigth DSWeb 2021.2.
     </body>
 </html>

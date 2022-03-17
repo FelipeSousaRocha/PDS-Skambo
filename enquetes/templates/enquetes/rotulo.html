@@ -1,0 +1,33 @@
+{% extends 'enquetes/base.html' %}
+{% load static %}
+
+
+    {% block titulo %}
+        <h3>Enquetes com o rótulo {{ rotulo.titulo | upper }}</h3>
+    {% endblock %}
+
+    {% block conteudo %}
+            <h4>Enquetes Ativas deste Rótulo</h4>
+            <ul>
+            {% for enquete in ativas.all %}
+                <li>
+                   <a href="{% url 'enquetes:detalhes' enquete.id %}">
+                       {{ enquete.texto }}
+                    </a>
+                </li>
+            {% endfor %}
+            {% if not ativas %}<li>Nenhuma enquete ativa.</li>{% endif %}
+            </ul>
+            <hr/>
+            <h4>Enquetes Encerradas deste Rótulo</h4>
+            <ul>
+            {% for enquete in encerradas.all %}
+                <li>
+                   <a href="{% url 'enquetes:detalhes' enquete.id %}">
+                       {{ enquete.texto }}
+                    </a>
+                </li>
+            {% endfor %}
+            {% if not encerradas %}<li>Nenhuma enquete encerrada.</li>{% endif %}
+            </ul>
+    {% endblock %}

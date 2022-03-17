@@ -3,6 +3,19 @@
     margin-left: 18px;
 }
 
+.trocas{
+    margin-left: 10px;
+}
+
+.troca{
+    margin-left: 10px;
+    color: #DEC312;
+}
+
+.troca:hover{
+    color: #4a4a4a;
+}
+
 .label{
     display: flex;
     align-items: center;
@@ -231,7 +244,7 @@ a {
 	margin-bottom: 15px;
 	font-size: 24px;
 	font-weight: 700;
-	color: #1e1e1e;
+	color: #DEC312;
 }
 .banner .caption .line-dec {
 	width: 30px;

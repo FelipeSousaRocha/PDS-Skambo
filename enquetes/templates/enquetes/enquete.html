@@ -4,22 +4,44 @@
 {% block titulo %}<h3>Detalhes da enquete #{{ pergunta.id }}</h3>{% endblock %}
 
 {% block conteudo %}
-        <h2>Enquete: {{ pergunta.texto | title }}</h2>
-        <p><b>Data de publicação:</b>{{ pergunta.data_publicacao | date:"h:m, d/m/y" }}</p>
-        <p><b>Escolha a opção desejada:</b></p>
-        <form method="post" action="{% url 'enquetes:votacao' pergunta.id %}">
-            {% csrf_token %}
-            <ul>
-                {% for opcao in pergunta.opcao_set.all %}
-                    <li>
-                        <input type="radio" name="opcao" value="{{ opcao.id }}"
-                               id="opcao{{ forloop.counter }}">
-                        <label for="opcao{{ forloop.counter }}">
-                            {{ opcao.texto }}
-                        </label>
-                    </li>
-                {% endfor %}
-            </ul>
-            <input type="submit" value="Registre o seu voto">
-        </form>
+         <h4>Enquete: {{ pergunta.texto | title }}</h4>
+    {% if pergunta.imagem %}
+        <center>
+        <img src="{{ pergunta.imagem.url }}" alt="Logo da enquete" height="180">
+        </center>
+        <br/>
+    {% endif %}
+    <b>Escolha a opção desejada:</b><br/>
+    <form method="post" action="{% url 'enquetes:votacao' pergunta.id %}">
+        {% csrf_token %}
+        <ul>
+            {% for opcao in pergunta.opcao_set.all %}
+                <li>
+                    <input type="radio" name="opcao" value="{{ opcao.id }}"
+                           id="opcao{{ forloop.counter }}">
+                    <label for="opcao{{ forloop.counter }}">
+                        {{ opcao.texto }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="Registe o seu voto">
+    </form>
+    <hr/>
+    <h4>Detalhes da Enquete:</h4>
+    <b>Autor:</b>
+    <a href="{% url 'enquetes:autor' pergunta.autor.id %}">
+        {{ pergunta.autor.nome }}
+    </a><br/>
+    <b>Rótulos:</b>
+    {% for rotulo in pergunta.rotulos.all %}
+        <a href="{% url 'enquetes:rotulo' rotulo.id %}">
+        {{ rotulo.titulo }}</a>{% if forloop.counter < pergunta.rotulos.count %};
+        {% endif %}
+    {% endfor %}<br/>
+    <b>Data de publicação:</b>
+    {{ pergunta.data_publicacao | date:"d/m/Y"}}<br/>
+    <b>Encerra em: </b>
+    {{ pergunta.data_encerramento | timeuntil }}<br/>
+
 {% endblock %}

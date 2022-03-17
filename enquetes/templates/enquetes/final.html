@@ -1,0 +1,37 @@
+{% extends 'enquetes/base.html' %}
+{% load static %}
+
+{% block titulo %}
+<h3>Resultado FINAL da Enquete #{{ pergunta.id }}</h3>
+{% endblock %}
+
+{% block conteudo %}
+    <h4>Enquete: {{ pergunta.texto }}</h4>
+    <ul>
+        {% for opcao in opcoes %}
+            <li>
+            {% if forloop.counter == 1 %}<b>[vencedora]{% endif %}
+            {{ opcao.texto }} == {{ opcao.votos }}
+            voto{{ opcao.votos | pluralize }}
+            == {{ opcao.porcentagem | floatformat:"0" }}%
+            {% if forloop.counter == 1 %}</b><p></p>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <hr/>
+    <h4>Detalhes da Enquete:</h4>
+    <b>Autor:</b>
+    <a href="{% url 'enquetes:autor' pergunta.autor.id %}">
+        {{ pergunta.autor.nome }}
+    </a><br/>
+    <b>Rótulos:</b>
+    {% for rotulo in pergunta.rotulos.all %}
+        <a href="{% url 'enquetes:rotulo' rotulo.id %}">
+        {{ rotulo.titulo }}</a>{% if forloop.counter < pergunta.rotulos.count %};
+        {% endif %}
+    {% endfor %}<br/>
+    <b>Data de publicação:</b>
+    {{ pergunta.data_publicacao | date:"d/m/Y"}}<br/>
+    <b>Data de encerramento:</b>
+    {{ pergunta.data_encerramento | date:"d/m/Y"}}<br/>
+{% endblock %}

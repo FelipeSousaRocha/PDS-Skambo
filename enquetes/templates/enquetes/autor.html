@@ -1,0 +1,37 @@
+{% extends 'enquetes/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    <h3>Perfil de Autor: {{ autor.nome }}
+    {% if autor.id == user.autor.id %}
+        (<a href="{% url 'enquetes:editar_perfil' user.autor.id %}">edite o seu perfil</a>)
+    {% endif %}</h3>
+{% endblock %}
+
+{% block conteudo %}
+        <b>Gênero:</b> {{ autor.genero }}</br>
+        <b>Descrição:</b> {{ autor.descricao }}
+        <h4>Enquetes Ativas deste Autor</h4>
+        <ul>
+        {% for enquete in ativas.all %}
+            <li>
+               <a href="{% url 'enquetes:detalhes' enquete.id %}">
+                   {{ enquete.texto }}
+                </a>
+            </li>
+        {% endfor %}
+        {% if not ativas %}<li>Nenhuma enquete ativa.</li>{% endif %}
+        </ul>
+        <hr/>
+        <h4>Enquetes Encerradas deste Autor</h4>
+        <ul>
+        {% for enquete in encerradas.all %}
+            <li>
+               <a href="{% url 'enquetes:detalhes' enquete.id %}">
+                   {{ enquete.texto }}
+                </a>
+            </li>
+        {% endfor %}
+        {% if not encerradas %}<li>Nenhuma enquete encerrada.</li>{% endif %}
+        </ul>
+{% endblock %}

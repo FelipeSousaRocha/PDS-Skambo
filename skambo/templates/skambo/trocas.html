@@ -1,0 +1,27 @@
+{% extends 'skambo/base.html' %}
+{% load static %}
+
+    {% block conteudo %}
+        <!-- Featured Starts Here -->
+        <div class="featured-items">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section-heading">
+                  <div class="line-dec"></div>
+                  <h1>Trocas</h1>
+                </div>
+              </div>
+
+              <!-- Trocas aqui -->
+                    <ul>
+                        {% for troca in trocas %}
+                            <ul>
+                                <li><strong><h4>Troca entre:</strong> {{ troca.anuncio_desejado }} e {{ troca.anuncio_proposto }}</h4></li>
+                                <strong>Data:</strong> <span>{{ troca.data }}</span>
+                                <br>
+                                <br>
+                            </ul>
+                        {% endfor %}
+                    </ul>
+    {% endblock %}

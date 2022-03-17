@@ -24,45 +24,45 @@
               </div>
 
 
-              <div class="col-md-6">
+             <div class="col-md-6">
                 <div class="right-content">
-                  <h2>Anuncio: {{ anuncio.descricao }}</h2>
-                  <p>
-                    Proin commodo, diam a ultricies sagittis, erat odio rhoncus
-                    metus, eu feugiat lorem lacus aliquet arcu. Curabitur in gravida
-                    nisi, non placerat nibh. Praesent sit amet diam ultrices,
-                    commodo turpis id, dignissim leo. Suspendisse mauris massa,
-                    porttitor non fermentum vel, ullamcorper scelerisque velit.
-                  </p>
-                  <form action="{% url 'skambo:proposal' %}" method="get">
-                    <input type="submit" class="button" value="Realizar proposta!" />
-                  </form>
-                  <div class="down-content">
-                    <div class="categories">
-                      <h6>
-                        Categorias:
-                        <span
-                          ><a href="#">Escola</a>,<a href="#">Móveis</a>,<a href="#"
-                            >Esportes</a
-                          ></span
-                        >
-                      </h6>
-                    </div>
-                    <div class="share">
-                      <h6>
-                        Share:
-                        <span
-                          ><a href="#"><i class="fa fa-facebook"></i></a
-                          ><a href="#"><i class="fa fa-linkedin"></i></a
-                          ><a href="#"><i class="fa fa-twitter"></i></a
-                        ></span>
-                      </h6>
+                    <h2>Anuncio: {{ anuncio.descricao }}</h2>
+                      <p>
+                        Proin commodo, diam a ultricies sagittis, erat odio rhoncus
+                        metus, eu feugiat lorem lacus aliquet arcu. Curabitur in gravida
+                        nisi, non placerat nibh. Praesent sit amet diam ultrices,
+                        commodo turpis id, dignissim leo. Suspendisse mauris massa,
+                        porttitor non fermentum vel, ullamcorper scelerisque velit.
+                      </p>
+                      <form action="{% url 'skambo:proposal' anuncio.id %}" method="get">
+                        <input type="submit" class="button" value="Realizar proposta!" />
+                      </form>
+                      <div class="down-content">
+                        <div class="categories">
+                          <h6>
+                            Categorias:
+                            <span
+                              ><a href="#">Escola</a>,<a href="#">Móveis</a>,<a href="#"
+                                >Esportes</a
+                              ></span
+                            >
+                          </h6>
+                        </div>
+                        <div class="share">
+                          <h6>
+                            Share:
+                            <span
+                              ><a href="#"><i class="fa fa-facebook"></i></a
+                              ><a href="#"><i class="fa fa-linkedin"></i></a
+                              ><a href="#"><i class="fa fa-twitter"></i></a
+                            ></span>
+                          </h6>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+             </div>
         </div>
         <!-- Single Page Ends Here -->
     {% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Usuario, Proposta, Produto, Servico
+from .models import Usuario, Proposta, Produto, Servico, Troca
 
 class UsuarioAdmin(admin.ModelAdmin):
     list_display = ('nome', 'usuario', 'id', 'genero', 'descricao')
@@ -7,5 +7,6 @@ class UsuarioAdmin(admin.ModelAdmin):
 
 admin.site.register(Usuario, UsuarioAdmin)
 admin.site.register(Proposta)
+admin.site.register(Troca)
 admin.site.register(Produto)
 admin.site.register(Servico)

@@ -29,6 +29,8 @@ class Anuncio(models.Model):
     imagem = models.ImageField(upload_to='media', null=True, blank=True)
     ativo = models.BooleanField()
     anunciante = models.ForeignKey(Usuario, on_delete = models.CASCADE)
+    def propostas_em_aberto(self):
+        return self.propostas_recebidas.filter(respondida = False)
     def __str__(self):
         return self.descricao
 
@@ -85,7 +87,7 @@ class ProdutoForm(ModelForm):
         ]
 
 class Proposta(models.Model):
-    anuncio_ofertado = models.ForeignKey(
+    anuncio_desejado = models.ForeignKey(
         Anuncio, on_delete = models.CASCADE, null=True,
         related_name = "propostas_recebidas"
     )
@@ -101,7 +103,7 @@ class PropostaForm(ModelForm):
     class Meta:
         model = Proposta
         fields = [
-            'anuncio_ofertado', 'anuncio_proposto'
+           'anuncio_proposto',
         ]
 
 class Troca(models.Model):

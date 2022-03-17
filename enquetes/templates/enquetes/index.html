@@ -4,18 +4,31 @@
 {% block titulo %}{% endblock %}
 
 {% block conteudo %}
+
+    <hr/>
+        <b>Pesquise enquetes por rótulo: </b>
+        {% for r in rotulos %}
+            <a href="{% url 'enquetes:rotulo' r.id %}">{{ r.titulo }}</a>{% if forloop.counter < rotulos.count %};
+            {% endif %}
+        {% endfor %}
+        <hr/>
+        <form method="get" action="{% url 'enquetes:busca' %}">
+            <b>Pesquise enquetes pelo texto:</b>
+            <input type="text" size="40" name="str_busca"/>
+            <input type="submit" value="Pesquisar">
+        </form>
+    <hr/>
+
         {% if ultimas_enquetes %}
             <ol>
                 {% for pergunta in ultimas_enquetes %}
                     <li><a href="{% url 'enquetes:detalhes' pergunta.id %}">
-                        {{ pergunta.texto | truncatewords:100 }}</a>
+                        {{ pergunta.texto | truncatewords:13 }}</a>
                     </li>
                 {% endfor %}
-            </ol>
-        {% else %}
-            <h3>Nenhuma enquete cadastrada até o momento!</h3>
+            </ul>
+            {% else %}
+                <h3>Nenhuma enquete cadastrada até o momento!</h3>
         {% endif %}
-{% endblock %}
 
-    </body>
-</html>
+{% endblock %}

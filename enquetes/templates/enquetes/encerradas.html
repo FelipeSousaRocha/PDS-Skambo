@@ -1,0 +1,20 @@
+{% extends 'enquetes/base.html' %}
+{% load static %}
+
+{%block titulo %}<h3>Enquetes Encerradas</h3>{% endblock %}
+
+{% block conteudo %}
+        {% if enquetes %}
+            <ul>
+                {% for pergunta in enquetes %}
+                    <li><a href="{% url 'enquetes:detalhes' pergunta.id %}">
+                        {{ pergunta.texto | truncatewords:13 }}</a>
+                        (encerrou em
+                        {{ pergunta.data_encerramento | date:"d/M/Y" }})
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>Nenhuma enquete encerrada até essa data!</h3>
+        {% endif %}
+{% endblock %}

@@ -7,17 +7,19 @@ class OpcaoInline(admin.TabularInline):
 
 class PerguntaAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,{'fields': ['texto', 'autor']}),
+        (None, {'fields': ['texto', 'autor', 'imagem']}),
         ('Rótulos', {'fields': ['rotulos']}),
-        ('Informações da Data',{'fields': ['data_publicacao']}),
+        ('Informações de Data', {
+            'fields': ['data_publicacao', 'data_encerramento']
+        }),
         ]
     inlines = [OpcaoInline]
-    list_display = ('texto', 'id', 'autor','data_publicacao', 'publicada_recentemente')
+    list_display = ('texto', 'id', 'autor', 'data_encerramento', 'publicada_recentemente')
     list_filter = ['data_publicacao']
     search_fields = ['texto']
 
 class AutorAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'id', 'genero', 'descricao')
+    list_display = ('nome', 'usuario','id', 'genero', 'descricao')
     search_fields = ['nome']
 
 class RotuloAdmin(admin.ModelAdmin):
