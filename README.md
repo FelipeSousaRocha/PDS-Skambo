@@ -1,2 +1,2 @@
 # PDS-Skambo
-Projeto de Desenvolvimento Wev Skambo
+Projeto de Desenvolvimento Web Skambo
